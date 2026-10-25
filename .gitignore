@@ -1,0 +1,14 @@
+# Локальные настройки с паролями — не в репозиторий
+/includes/config.php
+.env
+
+# Системные и IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+
+# Зависимости (если появятся позже)
+/vendor/
+/node_modules/

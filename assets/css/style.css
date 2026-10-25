@@ -1,0 +1,26 @@
+/* Небольшие дополнения к Pico.css */
+
+body > main.container {
+  min-height: 60vh;
+}
+
+.material-card {
+  margin-bottom: 1rem;
+}
+
+.filters {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .filters {
+    grid-template-columns: 2fr 1fr auto;
+    align-items: end;
+  }
+}
+
+.muted {
+  color: var(--pico-muted-color);
+}
