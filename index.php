@@ -48,6 +48,8 @@ require __DIR__ . '/includes/header.php';
 <h1>Учебные материалы</h1>
 <p class="muted">Найдите материал по названию или выберите категорию.</p>
 
+<?php $filtersActive = ($search !== '' || $categoryId > 0); ?>
+
 <form class="filters" method="get" action="/index.php" role="search">
     <label>
         Поиск по названию
@@ -64,7 +66,12 @@ require __DIR__ . '/includes/header.php';
             <?php endforeach; ?>
         </select>
     </label>
-    <button type="submit">Найти</button>
+    <div class="filter-actions">
+        <button type="submit">Найти</button>
+        <?php if ($filtersActive): ?>
+            <a class="secondary" href="/index.php">Сбросить</a>
+        <?php endif; ?>
+    </div>
 </form>
 
 <?php if (!$materials): ?>
