@@ -3,6 +3,7 @@
  * Вход администратора: форма, проверка логина/пароля, сессия.
  */
 require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/validation.php';
 
 startSession();
 
@@ -12,20 +13,23 @@ if (isAdminLoggedIn()) {
     exit;
 }
 
-$error = '';
+$errors = [];
 $loginValue = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $loginValue = trim($_POST['login'] ?? '');
     $password = $_POST['password'] ?? '';
 
-    if ($loginValue === '' || $password === '') {
-        $error = 'Введите логин и пароль.';
-    } elseif (attemptLogin($loginValue, $password)) {
-        header('Location: /admin/index.php');
-        exit;
-    } else {
-        $error = 'Неверный логин или пароль.';
+    $validated = validateLoginInput($loginValue, $password);
+    $errors = $validated['errors'];
+    $loginValue = $validated['login'];
+
+    if (!$errors) {
+        if (attemptLogin($loginValue, $password)) {
+            header('Location: /admin/index.php');
+            exit;
+        }
+        $errors[] = 'Неверный логин или пароль.';
     }
 }
 
@@ -37,23 +41,30 @@ require __DIR__ . '/../includes/header.php';
 <h1>Вход администратора</h1>
 <p class="muted">Доступ только для учётной записи администратора.</p>
 
-<?php if ($error !== ''): ?>
-    <p class="error" role="alert"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
+<div id="js-errors" class="error" hidden></div>
+
+<?php if ($errors): ?>
+    <ul class="error" role="alert">
+        <?php foreach ($errors as $error): ?>
+            <li><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></li>
+        <?php endforeach; ?>
+    </ul>
 <?php endif; ?>
 
-<form method="post" action="/admin/login.php" autocomplete="off">
+<form method="post" action="/admin/login.php" autocomplete="off" data-validate="login">
     <label>
         Логин
-        <input type="text" name="login" required maxlength="50"
+        <input type="text" name="login" maxlength="50"
                value="<?= htmlspecialchars($loginValue, ENT_QUOTES, 'UTF-8') ?>">
     </label>
     <label>
         Пароль
-        <input type="password" name="password" required maxlength="100">
+        <input type="password" name="password" maxlength="100">
     </label>
     <button type="submit">Войти</button>
 </form>
 
 <p><a href="/index.php">Вернуться в каталог</a></p>
 
+<script src="/assets/js/validation.js" defer></script>
 <?php require __DIR__ . '/../includes/footer.php'; ?>
