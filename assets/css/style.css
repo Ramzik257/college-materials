@@ -24,3 +24,8 @@ body > main.container {
 .muted {
   color: var(--pico-muted-color);
 }
+
+.error {
+  color: var(--pico-del-color, #c62828);
+  font-weight: 600;
+}

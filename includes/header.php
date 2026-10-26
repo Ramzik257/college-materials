@@ -5,6 +5,11 @@ if (!isset($pageTitle)) {
 if (!isset($pageDescription)) {
     $pageDescription = 'Каталог учебных материалов для студентов колледжа';
 }
+
+if (!function_exists('isAdminLoggedIn')) {
+    require_once __DIR__ . '/auth.php';
+}
+$adminLoggedIn = isAdminLoggedIn();
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -24,7 +29,12 @@ if (!isset($pageDescription)) {
         </ul>
         <ul>
             <li><a href="/index.php">Каталог</a></li>
-            <li><a href="/admin/login.php">Админ</a></li>
+            <?php if ($adminLoggedIn): ?>
+                <li><a href="/admin/index.php">Панель</a></li>
+                <li><a href="/admin/logout.php">Выйти</a></li>
+            <?php else: ?>
+                <li><a href="/admin/login.php">Админ</a></li>
+            <?php endif; ?>
         </ul>
     </nav>
 </header>
