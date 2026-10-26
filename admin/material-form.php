@@ -3,6 +3,7 @@
  * Добавление и изменение материала (только для администратора).
  */
 require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/validation.php';
 requireAdmin();
 
 $pdo = db();
@@ -31,38 +32,9 @@ if ($isEdit && $_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $material['title'] = trim($_POST['title'] ?? '');
-    $material['description'] = trim($_POST['description'] ?? '');
-    $material['category_id'] = (int) ($_POST['category_id'] ?? 0);
-    $material['url'] = trim($_POST['url'] ?? '');
-
-    if ($material['title'] === '') {
-        $errors[] = 'Укажите название.';
-    } elseif (mb_strlen($material['title']) > 200) {
-        $errors[] = 'Название не длиннее 200 символов.';
-    }
-
-    if ($material['description'] === '') {
-        $errors[] = 'Укажите описание.';
-    }
-
-    if ($material['category_id'] <= 0) {
-        $errors[] = 'Выберите категорию.';
-    } else {
-        $check = $pdo->prepare('SELECT id FROM categories WHERE id = :id');
-        $check->execute(['id' => $material['category_id']]);
-        if (!$check->fetch()) {
-            $errors[] = 'Выбранная категория не существует.';
-        }
-    }
-
-    if ($material['url'] === '') {
-        $errors[] = 'Укажите ссылку на ресурс.';
-    } elseif (!filter_var($material['url'], FILTER_VALIDATE_URL)) {
-        $errors[] = 'Ссылка должна быть корректным URL (например https://…).';
-    } elseif (mb_strlen($material['url']) > 500) {
-        $errors[] = 'Ссылка не длиннее 500 символов.';
-    }
+    $validated = validateMaterialInput($_POST, $pdo);
+    $errors = $validated['errors'];
+    $material = $validated['data'];
 
     if (!$errors) {
         if ($isEdit) {
@@ -107,6 +79,8 @@ require __DIR__ . '/../includes/header.php';
 <h1><?= $isEdit ? 'Изменить материал' : 'Добавить материал' ?></h1>
 <p><a href="/admin/index.php">← К списку</a></p>
 
+<div id="js-errors" class="error" hidden></div>
+
 <?php if ($errors): ?>
     <ul class="error" role="alert">
         <?php foreach ($errors as $error): ?>
@@ -115,25 +89,25 @@ require __DIR__ . '/../includes/header.php';
     </ul>
 <?php endif; ?>
 
-<form method="post" action="/admin/material-form.php<?= $isEdit ? '?id=' . (int) $id : '' ?>">
+<form method="post" action="/admin/material-form.php<?= $isEdit ? '?id=' . (int) $id : '' ?>" data-validate="material">
     <?php if ($isEdit): ?>
         <input type="hidden" name="id" value="<?= (int) $id ?>">
     <?php endif; ?>
 
     <label>
         Название
-        <input type="text" name="title" required maxlength="200"
+        <input type="text" name="title" maxlength="200"
                value="<?= htmlspecialchars($material['title'], ENT_QUOTES, 'UTF-8') ?>">
     </label>
 
     <label>
         Описание
-        <textarea name="description" required rows="5"><?= htmlspecialchars($material['description'], ENT_QUOTES, 'UTF-8') ?></textarea>
+        <textarea name="description" rows="5"><?= htmlspecialchars($material['description'], ENT_QUOTES, 'UTF-8') ?></textarea>
     </label>
 
     <label>
         Категория
-        <select name="category_id" required>
+        <select name="category_id">
             <option value="0">Выберите категорию</option>
             <?php foreach ($categories as $category): ?>
                 <option value="<?= (int) $category['id'] ?>"
@@ -146,11 +120,12 @@ require __DIR__ . '/../includes/header.php';
 
     <label>
         Ссылка на внешний ресурс
-        <input type="url" name="url" required maxlength="500" placeholder="https://…"
+        <input type="url" name="url" maxlength="500" placeholder="https://…"
                value="<?= htmlspecialchars($material['url'], ENT_QUOTES, 'UTF-8') ?>">
     </label>
 
     <button type="submit"><?= $isEdit ? 'Сохранить' : 'Добавить' ?></button>
 </form>
 
+<script src="/assets/js/validation.js" defer></script>
 <?php require __DIR__ . '/../includes/footer.php'; ?>

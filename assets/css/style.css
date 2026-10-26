@@ -40,3 +40,9 @@ body > main.container {
   color: var(--pico-del-color, #c62828);
   font-weight: 600;
 }
+
+#js-errors {
+  color: var(--pico-del-color, #c62828);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
