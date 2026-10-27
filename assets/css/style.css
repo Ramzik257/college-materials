@@ -302,6 +302,10 @@ a.secondary,
   background: rgba(14, 42, 56, 0.5);
 }
 
+.detail-actions {
+  margin-top: 1.25rem;
+}
+
 .back-link {
   display: inline-block;
   margin-bottom: 1rem;

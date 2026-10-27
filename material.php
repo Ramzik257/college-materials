@@ -45,7 +45,7 @@ require __DIR__ . '/includes/header.php';
     <h1><?= htmlspecialchars($material['title'], ENT_QUOTES, 'UTF-8') ?></h1>
     <span class="chip"><?= htmlspecialchars($material['category_name'], ENT_QUOTES, 'UTF-8') ?></span>
     <p class="material-body"><?= nl2br(htmlspecialchars($material['description'], ENT_QUOTES, 'UTF-8')) ?></p>
-    <p style="margin-top: 1.25rem;">
+    <p class="detail-actions">
         <a class="button-link" href="<?= htmlspecialchars($material['url'], ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer">
             Открыть внешний ресурс
         </a>
