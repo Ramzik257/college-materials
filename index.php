@@ -2,7 +2,10 @@
 /**
  * Главная: список материалов, поиск по названию, фильтр по категории.
  */
+require_once __DIR__ . '/includes/user_auth.php';
 require_once __DIR__ . '/includes/db.php';
+
+requireUserOrGuest();
 
 $pdo = db();
 
@@ -40,13 +43,15 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $materials = $stmt->fetchAll();
 
-$pageTitle = 'Каталог учебных материалов';
+$pageTitle = 'Каталог · Campus Notes';
 $pageDescription = 'Список материалов с поиском и фильтром по категориям';
 require __DIR__ . '/includes/header.php';
 ?>
 
-<h1>Учебные материалы</h1>
-<p class="muted">Найдите материал по названию или выберите категорию.</p>
+<section class="page-intro">
+    <h1>Каталог материалов</h1>
+    <p class="muted">Найдите материал по названию или выберите категорию.</p>
+</section>
 
 <?php $filtersActive = ($search !== '' || $categoryId > 0); ?>
 
@@ -75,25 +80,25 @@ require __DIR__ . '/includes/header.php';
 </form>
 
 <?php if (!$materials): ?>
-    <article>
+    <article class="detail-card">
         <p>Ничего не найдено. Измените запрос или сбросьте фильтр.</p>
         <p><a href="/index.php">Показать все материалы</a></p>
     </article>
 <?php else: ?>
     <p class="muted">Найдено: <?= count($materials) ?></p>
-    <?php foreach ($materials as $material): ?>
-        <article class="material-card">
-            <header>
+    <div class="material-list">
+        <?php foreach ($materials as $material): ?>
+            <article class="material-card">
                 <h2>
                     <a href="/material.php?id=<?= (int) $material['id'] ?>">
                         <?= htmlspecialchars($material['title'], ENT_QUOTES, 'UTF-8') ?>
                     </a>
                 </h2>
-                <p><small><?= htmlspecialchars($material['category_name'], ENT_QUOTES, 'UTF-8') ?></small></p>
-            </header>
-            <p><?= htmlspecialchars(mb_strimwidth($material['description'], 0, 160, '…', 'UTF-8'), ENT_QUOTES, 'UTF-8') ?></p>
-        </article>
-    <?php endforeach; ?>
+                <span class="chip"><?= htmlspecialchars($material['category_name'], ENT_QUOTES, 'UTF-8') ?></span>
+                <p class="material-body"><?= htmlspecialchars(mb_strimwidth($material['description'], 0, 160, '…', 'UTF-8'), ENT_QUOTES, 'UTF-8') ?></p>
+            </article>
+        <?php endforeach; ?>
+    </div>
 <?php endif; ?>
 
 <?php require __DIR__ . '/includes/footer.php'; ?>

@@ -35,5 +35,14 @@ CREATE TABLE admins (
   password_hash VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
 
+-- Обычные пользователи (регистрация на сайте)
+CREATE TABLE users (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(190) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
 -- Индекс для поиска по названию
 CREATE INDEX idx_materials_title ON materials (title);

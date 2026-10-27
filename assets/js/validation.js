@@ -69,31 +69,56 @@
     return errors;
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    var loginForm = document.querySelector("form[data-validate='login']");
-    if (loginForm) {
-      loginForm.setAttribute("novalidate", "novalidate");
-      loginForm.addEventListener("submit", function (event) {
-        var box = document.getElementById("js-errors");
-        var errors = validateLoginForm(loginForm);
-        if (errors.length) {
-          event.preventDefault();
-          showErrors(box, errors);
-        }
-      });
+  function validateUserLoginForm(form) {
+    var errors = [];
+    var email = (form.email.value || "").trim();
+    var password = form.password.value || "";
+    if (!email) {
+      errors.push("Введите email.");
     }
+    if (!password) {
+      errors.push("Введите пароль.");
+    }
+    return errors;
+  }
 
-    var materialForm = document.querySelector("form[data-validate='material']");
-    if (materialForm) {
-      materialForm.setAttribute("novalidate", "novalidate");
-      materialForm.addEventListener("submit", function (event) {
-        var box = document.getElementById("js-errors");
-        var errors = validateMaterialForm(materialForm);
-        if (errors.length) {
-          event.preventDefault();
-          showErrors(box, errors);
-        }
-      });
+  function validateUserRegisterForm(form) {
+    var errors = [];
+    var name = (form.name.value || "").trim();
+    var email = (form.email.value || "").trim();
+    var password = form.password.value || "";
+    if (name.length < 2) {
+      errors.push("Укажите имя (минимум 2 символа).");
     }
+    if (!email) {
+      errors.push("Укажите email.");
+    }
+    if (password.length < 6) {
+      errors.push("Пароль не короче 6 символов.");
+    }
+    return errors;
+  }
+
+  function bindForm(selector, validator) {
+    var form = document.querySelector(selector);
+    if (!form) {
+      return;
+    }
+    form.setAttribute("novalidate", "novalidate");
+    form.addEventListener("submit", function (event) {
+      var box = document.getElementById("js-errors");
+      var errors = validator(form);
+      if (errors.length) {
+        event.preventDefault();
+        showErrors(box, errors);
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    bindForm("form[data-validate='login']", validateLoginForm);
+    bindForm("form[data-validate='material']", validateMaterialForm);
+    bindForm("form[data-validate='user-login']", validateUserLoginForm);
+    bindForm("form[data-validate='user-register']", validateUserRegisterForm);
   });
 })();
