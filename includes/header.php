@@ -20,6 +20,7 @@ $adminLoggedIn = isAdminLoggedIn();
 $userLoggedIn = isUserLoggedIn();
 $guestBrowse = isGuestBrowse();
 $userName = currentUserName();
+$userAvatar = $userLoggedIn ? currentUserAvatar() : '';
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -47,7 +48,12 @@ $userName = currentUserName();
                 <a class="nav-quiet" href="/admin/login.php">Админ</a>
             <?php endif; ?>
             <?php if ($userLoggedIn): ?>
-                <span class="nav-user"><?= htmlspecialchars($userName, ENT_QUOTES, 'UTF-8') ?></span>
+                <a class="nav-profile" href="/profile.php" title="Мой профиль">
+                    <?php if ($userAvatar !== ''): ?>
+                        <img class="nav-avatar" src="<?= htmlspecialchars($userAvatar, ENT_QUOTES, 'UTF-8') ?>" alt="">
+                    <?php endif; ?>
+                    <span><?= htmlspecialchars($userName, ENT_QUOTES, 'UTF-8') ?></span>
+                </a>
                 <a href="/logout-user.php">Выйти</a>
             <?php elseif ($guestBrowse): ?>
                 <a href="/welcome.php">Войти</a>

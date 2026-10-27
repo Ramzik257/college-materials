@@ -99,6 +99,36 @@
     return errors;
   }
 
+  function validateProfileForm(form) {
+    var errors = [];
+    var name = (form.name.value || "").trim();
+    var bio = (form.bio.value || "").trim();
+    if (name.length < 2) {
+      errors.push("Укажите имя (минимум 2 символа).");
+    }
+    if (bio.length > 300) {
+      errors.push("О себе — не длиннее 300 символов.");
+    }
+    return errors;
+  }
+
+  function validateChangePasswordForm(form) {
+    var errors = [];
+    var current = form.current_password.value || "";
+    var next = form.new_password.value || "";
+    var confirm = form.confirm_password.value || "";
+    if (!current || !next || !confirm) {
+      errors.push("Заполните все поля пароля.");
+    }
+    if (next && next.length < 6) {
+      errors.push("Новый пароль не короче 6 символов.");
+    }
+    if (next && confirm && next !== confirm) {
+      errors.push("Подтверждение пароля не совпадает.");
+    }
+    return errors;
+  }
+
   function bindForm(selector, validator) {
     var form = document.querySelector(selector);
     if (!form) {
@@ -120,5 +150,7 @@
     bindForm("form[data-validate='material']", validateMaterialForm);
     bindForm("form[data-validate='user-login']", validateUserLoginForm);
     bindForm("form[data-validate='user-register']", validateUserRegisterForm);
+    bindForm("form[data-validate='profile']", validateProfileForm);
+    bindForm("form[data-validate='change-password']", validateChangePasswordForm);
   });
 })();
