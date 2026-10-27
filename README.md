@@ -59,6 +59,9 @@
 - [Схема БД](docs/database-schema.md)
 - [Таблица проверок](docs/checklist.md)
 - [Список задач участников](docs/tasks.md)
+- [Сравнение хостингов](docs/hosting.md)
+- [Продвижение сайта](docs/promotion.md)
+- [Учебный merge conflict](docs/merge-conflict-drill.md)
 - [Как работать в Git](docs/git-workflow.md)
 - [Список Issues](docs/issues.md)
 
