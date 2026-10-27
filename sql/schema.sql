@@ -41,7 +41,25 @@ CREATE TABLE users (
   name VARCHAR(100) NOT NULL,
   email VARCHAR(190) NOT NULL UNIQUE,
   password_hash VARCHAR(255) NOT NULL,
+  avatar_path VARCHAR(255) NULL DEFAULT NULL,
+  bio VARCHAR(300) NULL DEFAULT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- Избранные материалы пользователя
+CREATE TABLE favorites (
+  user_id INT UNSIGNED NOT NULL,
+  material_id INT UNSIGNED NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (user_id, material_id),
+  CONSTRAINT fk_favorites_user
+    FOREIGN KEY (user_id) REFERENCES users(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT fk_favorites_material
+    FOREIGN KEY (material_id) REFERENCES materials(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
 -- Индекс для поиска по названию

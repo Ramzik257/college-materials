@@ -467,6 +467,150 @@ th {
   color: var(--mist);
 }
 
+.nav-profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--fog);
+  text-decoration: none;
+}
+
+.nav-avatar {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(61, 220, 151, 0.45);
+}
+
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.inline-form {
+  display: inline;
+  margin: 0;
+}
+
+.btn-secondary,
+button.btn-secondary {
+  background: transparent;
+  color: var(--fog);
+  border: 1px solid rgba(215, 236, 230, 0.28);
+}
+
+.btn-secondary:hover,
+button.btn-secondary:hover {
+  filter: none;
+  border-color: rgba(61, 220, 151, 0.55);
+  color: var(--mint);
+}
+
+.flash-ok {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(61, 220, 151, 0.35);
+  background: rgba(61, 220, 151, 0.12);
+  color: var(--paper);
+}
+
+.fav-hint {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.profile-layout {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 860px) {
+  .profile-layout {
+    grid-template-columns: 280px 1fr;
+    align-items: start;
+  }
+}
+
+.profile-card {
+  padding: 1.4rem;
+  border-radius: calc(var(--radius) + 4px);
+  border: 1px solid var(--line);
+  background: rgba(14, 42, 56, 0.55);
+  text-align: center;
+}
+
+.avatar-wrap {
+  width: 7rem;
+  height: 7rem;
+  margin: 0 auto 1rem;
+}
+
+.avatar-img,
+.avatar-fallback {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(61, 220, 151, 0.4);
+}
+
+.avatar-fallback {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--paper);
+  background: linear-gradient(145deg, rgba(61, 220, 151, 0.35), rgba(14, 42, 56, 0.9));
+}
+
+.profile-name {
+  margin-bottom: 0.35rem;
+}
+
+.profile-bio {
+  margin-top: 0.9rem;
+  color: var(--fog);
+  line-height: 1.5;
+}
+
+.profile-meta {
+  margin-top: 1rem;
+  font-size: 0.82rem;
+}
+
+.profile-tabs {
+  margin-bottom: 1.1rem;
+}
+
+.profile-form {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.profile-fieldset {
+  margin: 0;
+  padding: 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(14, 42, 56, 0.45);
+  display: grid;
+  gap: 0.9rem;
+}
+
+.profile-fieldset legend {
+  padding: 0 0.4rem;
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
