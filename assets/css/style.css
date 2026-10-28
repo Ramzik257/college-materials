@@ -302,6 +302,144 @@ a.secondary,
   background: rgba(14, 42, 56, 0.5);
 }
 
+.detail-layout {
+  display: grid;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .detail-layout {
+    grid-template-columns: minmax(0, 1.45fr) minmax(240px, 0.7fr);
+    gap: 1.5rem;
+  }
+}
+
+.detail-main {
+  animation: rise 0.55s ease both;
+}
+
+.detail-header h1 {
+  margin-top: 0.65rem;
+}
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--mist);
+  font-size: 0.88rem;
+}
+
+.meta-label {
+  display: inline-block;
+  margin-right: 0.35rem;
+  color: rgba(155, 184, 176, 0.75);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.info-block {
+  margin-top: 1.35rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+}
+
+.info-title {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--paper);
+}
+
+.resource-block .resource-url {
+  margin: 0.75rem 0 0;
+  padding: 0.75rem 0.9rem;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px dashed rgba(215, 236, 230, 0.2);
+  color: var(--fog);
+  font-size: 0.84rem;
+  word-break: break-all;
+}
+
+.detail-side {
+  display: grid;
+  gap: 1rem;
+  animation: rise 0.65s ease 0.08s both;
+}
+
+.side-card {
+  padding: 1.15rem 1.2rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: rgba(10, 34, 44, 0.72);
+}
+
+.tip-card {
+  background:
+    linear-gradient(160deg, rgba(61, 220, 151, 0.12), transparent 55%),
+    rgba(10, 34, 44, 0.72);
+}
+
+.tip-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--mist);
+  line-height: 1.55;
+}
+
+.tip-list li + li {
+  margin-top: 0.45rem;
+}
+
+.fact-list {
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.fact-list div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.fact-list dt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(155, 184, 176, 0.75);
+}
+
+.fact-list dd {
+  margin: 0;
+  color: var(--paper);
+  font-weight: 600;
+}
+
+.related-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.related-list a {
+  color: var(--fog);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.related-list a:hover {
+  color: var(--mint);
+}
+
 .detail-actions {
   margin-top: 1.25rem;
 }
