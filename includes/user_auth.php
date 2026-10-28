@@ -36,6 +36,18 @@ function currentUserName(): string
     return (string) ($_SESSION['user_name'] ?? '');
 }
 
+function currentUserId(): int
+{
+    startUserSession();
+    return (int) ($_SESSION['user_id'] ?? 0);
+}
+
+function currentUserAvatar(): string
+{
+    startUserSession();
+    return (string) ($_SESSION['user_avatar'] ?? '');
+}
+
 /**
  * Пускает в каталог только после входа или режима гостя.
  */
@@ -95,6 +107,7 @@ function registerUser(string $name, string $email, string $password): array
     $_SESSION['user_id'] = (int) $pdo->lastInsertId();
     $_SESSION['user_name'] = $name;
     $_SESSION['user_email'] = $email;
+    $_SESSION['user_avatar'] = '';
 
     return ['ok' => true, 'errors' => []];
 }
@@ -109,7 +122,7 @@ function attemptUserLogin(string $email, string $password): array
     }
 
     $pdo = db();
-    $stmt = $pdo->prepare('SELECT id, name, email, password_hash FROM users WHERE email = :email LIMIT 1');
+    $stmt = $pdo->prepare('SELECT id, name, email, password_hash, avatar_path FROM users WHERE email = :email LIMIT 1');
     $stmt->execute(['email' => $email]);
     $user = $stmt->fetch();
 
@@ -123,6 +136,7 @@ function attemptUserLogin(string $email, string $password): array
     $_SESSION['user_id'] = (int) $user['id'];
     $_SESSION['user_name'] = $user['name'];
     $_SESSION['user_email'] = $user['email'];
+    $_SESSION['user_avatar'] = (string) ($user['avatar_path'] ?? '');
 
     return ['ok' => true, 'errors' => []];
 }
@@ -130,5 +144,11 @@ function attemptUserLogin(string $email, string $password): array
 function logoutUser(): void
 {
     startUserSession();
-    unset($_SESSION['user_id'], $_SESSION['user_name'], $_SESSION['user_email'], $_SESSION['guest_browse']);
+    unset(
+        $_SESSION['user_id'],
+        $_SESSION['user_name'],
+        $_SESSION['user_email'],
+        $_SESSION['user_avatar'],
+        $_SESSION['guest_browse']
+    );
 }

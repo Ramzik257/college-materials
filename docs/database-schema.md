@@ -5,6 +5,8 @@
 ```mermaid
 erDiagram
   categories ||--o{ materials : "имеет"
+  users ||--o{ favorites : "сохраняет"
+  materials ||--o{ favorites : "в избранном"
   categories {
     int id PK
     varchar name
@@ -28,6 +30,13 @@ erDiagram
     varchar name
     varchar email UK
     varchar password_hash
+    varchar avatar_path
+    varchar bio
+    timestamp created_at
+  }
+  favorites {
+    int user_id PK, FK
+    int material_id PK, FK
     timestamp created_at
   }
 ```
@@ -39,7 +48,8 @@ erDiagram
 | `categories` | Справочник категорий (название только здесь) |
 | `materials` | Учебные материалы, ссылка на категорию через `category_id` |
 | `admins` | Учётные записи администраторов (пароль только как хеш) |
-| `users` | Обычные пользователи сайта (регистрация / вход) |
+| `users` | Пользователи сайта: имя, email, аватар, «о себе» |
+| `favorites` | Избранные материалы пользователя |
 
 ## Почему так меньше повторений
 
@@ -51,7 +61,8 @@ erDiagram
 
 ## Файлы
 
-- `sql/schema.sql` — создание БД и таблиц (включая `users`)
+- `sql/schema.sql` — создание БД и таблиц (включая `users`, avatar/bio, `favorites`)
 - `sql/users.sql` — только таблица `users` (для уже существующей БД)
+- `sql/profile.sql` — avatar/bio + favorites (если БД уже была)
 - `sql/seed.sql` — 3 категории, 10 материалов, админ
 - `sql/queries.sql` — примеры INSERT / SELECT / UPDATE / DELETE
