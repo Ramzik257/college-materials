@@ -57,10 +57,12 @@ erDiagram
 В материале хранится только `category_id`. Чтобы показать название, делаем `JOIN`.  
 Переименование категории в одном месте сразу видно у всех материалов.
 
+`admins` и `users` разделены: админка и регистрация на сайте — разные роли.
+
 ## Файлы
 
-- `sql/schema.sql` — создание БД и таблиц
-- `sql/seed.sql` — 3 категории, 10 материалов, админ
-- `sql/users.sql` — таблица users (если БД уже была)
+- `sql/schema.sql` — создание БД и таблиц (включая `users`, avatar/bio, `favorites`)
+- `sql/users.sql` — только таблица `users` (для уже существующей БД)
 - `sql/profile.sql` — avatar/bio + favorites (если БД уже была)
+- `sql/seed.sql` — 3 категории, 10 материалов, админ
 - `sql/queries.sql` — примеры INSERT / SELECT / UPDATE / DELETE
