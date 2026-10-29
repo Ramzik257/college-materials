@@ -640,21 +640,22 @@ th {
 
 .btn-secondary,
 button.btn-secondary {
-  background: transparent;
-  color: var(--fog);
-  border: 1px solid rgba(215, 236, 230, 0.28);
+  background: rgba(243, 250, 247, 0.08);
+  color: var(--paper);
+  border: 1px solid rgba(243, 250, 247, 0.45);
 }
 
 .btn-secondary:hover,
 button.btn-secondary:hover {
   filter: none;
-  border-color: rgba(61, 220, 151, 0.55);
-  color: var(--mint);
+  background: rgba(61, 220, 151, 0.16);
+  border-color: var(--mint);
+  color: #b8ffe0;
 }
 
 .flash-ok {
-  margin: 0 0 1rem;
-  padding: 0.75rem 1rem;
+  margin: 0 0 1.5rem;
+  padding: 0.9rem 1.15rem;
   border-radius: 12px;
   border: 1px solid rgba(61, 220, 151, 0.35);
   background: rgba(61, 220, 151, 0.12);
@@ -668,18 +669,20 @@ button.btn-secondary:hover {
 
 .profile-layout {
   display: grid;
-  gap: 1.5rem;
+  gap: 2.25rem;
+  margin-top: 0.5rem;
 }
 
 @media (min-width: 860px) {
   .profile-layout {
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 300px 1fr;
+    gap: 2.75rem;
     align-items: start;
   }
 }
 
 .profile-card {
-  padding: 1.4rem;
+  padding: 1.85rem 1.6rem;
   border-radius: calc(var(--radius) + 4px);
   border: 1px solid var(--line);
   background: rgba(14, 42, 56, 0.55);
@@ -689,7 +692,7 @@ button.btn-secondary:hover {
 .avatar-wrap {
   width: 7rem;
   height: 7rem;
-  margin: 0 auto 1rem;
+  margin: 0 auto 1.35rem;
 }
 
 .avatar-img,
@@ -712,45 +715,113 @@ button.btn-secondary:hover {
 }
 
 .profile-name {
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.55rem;
 }
 
 .profile-bio {
-  margin-top: 0.9rem;
+  margin-top: 1.15rem;
   color: var(--fog);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .profile-meta {
-  margin-top: 1rem;
+  margin-top: 1.35rem;
   font-size: 0.82rem;
 }
 
+.profile-main {
+  display: grid;
+  gap: 0.35rem;
+}
+
 .profile-tabs {
-  margin-bottom: 1.1rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+  padding: 0.4rem;
+}
+
+.profile-tabs .auth-tab {
+  padding: 0.8rem 0.55rem;
+  border: 1px solid transparent;
+  color: rgba(215, 236, 230, 0.78);
+}
+
+.profile-tabs .auth-tab.is-active {
+  background: rgba(61, 220, 151, 0.28);
+  border-color: rgba(61, 220, 151, 0.55);
+  color: #f3faf7;
 }
 
 .profile-form {
   display: grid;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
+  gap: 1.35rem;
+  margin-bottom: 2rem;
+}
+
+.profile-form button,
+.profile-form .btn-primary {
+  background: #3ddc97;
+  color: #041810;
+  border: 1px solid #1faa6d;
+  box-shadow: 0 0 0 1px rgba(4, 24, 16, 0.25);
+  font-weight: 800;
+}
+
+.profile-form button:hover,
+.profile-form .btn-primary:hover {
+  background: #5aefad;
+  color: #041810;
+  filter: none;
+}
+
+.profile-form button.btn-secondary,
+.profile-form .btn-secondary {
+  background: rgba(243, 250, 247, 0.1);
+  color: #f3faf7;
+  border: 1px solid rgba(243, 250, 247, 0.55);
+  box-shadow: none;
+  font-weight: 700;
+}
+
+.profile-form button.btn-secondary:hover,
+.profile-form .btn-secondary:hover {
+  background: rgba(243, 250, 247, 0.18);
+  border-color: #f3faf7;
+  color: #ffffff;
 }
 
 .profile-fieldset {
   margin: 0;
-  padding: 1.1rem;
+  padding: 1.5rem 1.35rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: rgba(14, 42, 56, 0.45);
   display: grid;
-  gap: 0.9rem;
+  gap: 1.2rem;
 }
 
 .profile-fieldset legend {
-  padding: 0 0.4rem;
+  padding: 0 0.45rem;
+  margin-bottom: 0.25rem;
   color: var(--paper);
   font-family: var(--font-display);
   font-weight: 700;
+}
+
+.profile-fieldset .filter-actions {
+  margin-top: 0.35rem;
+  gap: 0.85rem;
+}
+
+.profile-main .material-list {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.profile-main .material-card {
+  padding: 1.35rem;
 }
 
 @keyframes rise {
