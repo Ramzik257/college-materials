@@ -26,6 +26,6 @@
 
 | Задача | Issue | Статус |
 |--------|-------|--------|
-| Учебный merge conflict | #9 | инструкция в `docs/merge-conflict-drill.md`; playground готов |
+| Учебный merge conflict | #9 | ✅ закрыт: PR #20–#23 (два раунда на `conflict-playground.md`) |
 | Сравнение хостингов / продвижение | #10 (часть) | `docs/hosting.md`, `docs/promotion.md` |
 | Выкладка + HTTPS | #10 | ⏳ согласовать с руководителем |
