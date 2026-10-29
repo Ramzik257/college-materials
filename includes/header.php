@@ -23,18 +23,36 @@ $userName = currentUserName();
 $userAvatar = $userLoggedIn ? currentUserAvatar() : '';
 ?>
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="<?= htmlspecialchars($pageDescription, ENT_QUOTES, 'UTF-8') ?>">
+    <meta name="color-scheme" content="dark light">
     <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('campus-notes-theme');
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          }
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) {}
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body class="<?= $isAuthPage ? 'page-auth' : 'page-app' ?>">
+<?php if ($isAuthPage): ?>
+<button type="button" class="theme-toggle theme-toggle-float" data-theme-toggle aria-label="Переключить тему">
+    <span class="label-dark">Светлая</span>
+    <span class="label-light">Тёмная</span>
+</button>
+<?php endif; ?>
 <?php if (!$isAuthPage): ?>
 <header class="site-header">
     <div class="shell header-row">
@@ -60,6 +78,10 @@ $userAvatar = $userLoggedIn ? currentUserAvatar() : '';
             <?php else: ?>
                 <a href="/welcome.php">Регистрация</a>
             <?php endif; ?>
+            <button type="button" class="theme-toggle" data-theme-toggle aria-label="Переключить тему">
+                <span class="label-dark">Светлая</span>
+                <span class="label-light">Тёмная</span>
+            </button>
         </nav>
     </div>
 </header>

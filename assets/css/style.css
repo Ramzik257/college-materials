@@ -1,4 +1,5 @@
-:root {
+:root,
+html[data-theme="dark"] {
   --ink: #071821;
   --ink-soft: #0e2a38;
   --fog: #d7ece6;
@@ -6,12 +7,57 @@
   --paper: #f3faf7;
   --mint: #3ddc97;
   --mint-deep: #1faa6d;
+  --mint-hover: #7dffc0;
   --warn: #ff6b6b;
   --line: rgba(215, 236, 230, 0.14);
   --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
   --radius: 18px;
   --font-display: "Syne", system-ui, sans-serif;
   --font-body: "Manrope", system-ui, sans-serif;
+  --bg-page:
+    radial-gradient(1200px 700px at 10% -10%, rgba(61, 220, 151, 0.18), transparent 55%),
+    radial-gradient(900px 600px at 100% 0%, rgba(56, 189, 248, 0.12), transparent 50%),
+    linear-gradient(165deg, #041018 0%, var(--ink) 45%, #0a2430 100%);
+  --bg-header: rgba(7, 24, 33, 0.78);
+  --bg-panel: rgba(14, 42, 56, 0.55);
+  --bg-card: rgba(14, 42, 56, 0.45);
+  --bg-card-hover: rgba(18, 54, 70, 0.7);
+  --bg-input: rgba(4, 16, 24, 0.65);
+  --bg-side: rgba(10, 34, 44, 0.72);
+  --bg-auth-panel: rgba(8, 30, 40, 0.78);
+  --bg-chip: rgba(61, 220, 151, 0.12);
+  --bg-tabs: rgba(0, 0, 0, 0.25);
+  --btn-on-mint: #042015;
+  --brand-gradient: linear-gradient(120deg, #f3faf7 20%, #3ddc97 85%);
+}
+
+html[data-theme="light"] {
+  --ink: #e8f3ef;
+  --ink-soft: #ffffff;
+  --fog: #1a2f2a;
+  --mist: #4d655e;
+  --paper: #0f1f1a;
+  --mint: #0f9f6e;
+  --mint-deep: #0b7a54;
+  --mint-hover: #0a6b49;
+  --warn: #d64545;
+  --line: rgba(15, 40, 32, 0.12);
+  --shadow: 0 18px 40px rgba(20, 50, 40, 0.12);
+  --bg-page:
+    radial-gradient(1000px 600px at 8% -5%, rgba(15, 159, 110, 0.14), transparent 55%),
+    radial-gradient(800px 500px at 100% 0%, rgba(56, 140, 200, 0.1), transparent 50%),
+    linear-gradient(165deg, #f4faf7 0%, #e7f2ec 45%, #dcebe3 100%);
+  --bg-header: rgba(255, 255, 255, 0.82);
+  --bg-panel: rgba(255, 255, 255, 0.78);
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --bg-card-hover: #ffffff;
+  --bg-input: #ffffff;
+  --bg-side: rgba(255, 255, 255, 0.9);
+  --bg-auth-panel: rgba(255, 255, 255, 0.92);
+  --bg-chip: rgba(15, 159, 110, 0.12);
+  --bg-tabs: rgba(15, 40, 32, 0.06);
+  --btn-on-mint: #ffffff;
+  --brand-gradient: linear-gradient(120deg, #0f1f1a 10%, #0f9f6e 90%);
 }
 
 *,
@@ -29,11 +75,9 @@ body {
   min-height: 100vh;
   font-family: var(--font-body);
   color: var(--fog);
-  background:
-    radial-gradient(1200px 700px at 10% -10%, rgba(61, 220, 151, 0.18), transparent 55%),
-    radial-gradient(900px 600px at 100% 0%, rgba(56, 189, 248, 0.12), transparent 50%),
-    linear-gradient(165deg, #041018 0%, var(--ink) 45%, #0a2430 100%);
+  background: var(--bg-page);
   background-attachment: fixed;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
 body.page-auth {
@@ -48,7 +92,7 @@ a {
 }
 
 a:hover {
-  color: #7dffc0;
+  color: var(--mint-hover);
 }
 
 .shell {
@@ -61,7 +105,7 @@ a:hover {
   top: 0;
   z-index: 20;
   backdrop-filter: blur(14px);
-  background: rgba(7, 24, 33, 0.72);
+  background: var(--bg-header);
   border-bottom: 1px solid var(--line);
   animation: drop-in 0.6s ease both;
 }
@@ -154,7 +198,7 @@ h2 {
   padding: 1.1rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: rgba(14, 42, 56, 0.55);
+  background: var(--bg-panel);
 }
 
 @media (min-width: 768px) {
@@ -182,9 +226,9 @@ input,
 textarea,
 select {
   width: 100%;
-  border: 1px solid rgba(215, 236, 230, 0.18);
+  border: 1px solid var(--line);
   border-radius: 12px;
-  background: rgba(4, 16, 24, 0.65);
+  background: var(--bg-input);
   color: var(--paper);
   padding: 0.75rem 0.9rem;
   outline: none;
@@ -205,7 +249,7 @@ a.button-link {
   border: 0;
   border-radius: 999px;
   background: linear-gradient(135deg, var(--mint), var(--mint-deep));
-  color: #042015;
+  color: var(--btn-on-mint);
   font-weight: 700;
   padding: 0.8rem 1.25rem;
   cursor: pointer;
@@ -221,7 +265,7 @@ button:hover,
 a.button-link:hover {
   filter: brightness(1.05);
   transform: translateY(-1px);
-  color: #042015;
+  color: var(--btn-on-mint);
 }
 
 button.contrast {
@@ -254,7 +298,7 @@ a.secondary,
   padding: 1.15rem 1.25rem;
   border-radius: var(--radius);
   border: 1px solid var(--line);
-  background: rgba(14, 42, 56, 0.45);
+  background: var(--bg-card);
   transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
   animation: rise 0.55s ease both;
 }
@@ -266,7 +310,7 @@ a.secondary,
 .material-card:hover {
   transform: translateY(-2px);
   border-color: rgba(61, 220, 151, 0.35);
-  background: rgba(18, 54, 70, 0.7);
+  background: var(--bg-card-hover);
 }
 
 .material-card a {
@@ -283,7 +327,7 @@ a.secondary,
   margin-top: 0.35rem;
   padding: 0.2rem 0.55rem;
   border-radius: 999px;
-  background: rgba(61, 220, 151, 0.12);
+  background: var(--bg-chip);
   color: var(--mint);
   font-size: 0.75rem;
   font-weight: 600;
@@ -299,7 +343,7 @@ a.secondary,
   padding: 1.5rem;
   border-radius: calc(var(--radius) + 4px);
   border: 1px solid var(--line);
-  background: rgba(14, 42, 56, 0.5);
+  background: var(--bg-card);
 }
 
 .detail-layout {
@@ -361,8 +405,8 @@ a.secondary,
   margin: 0.75rem 0 0;
   padding: 0.75rem 0.9rem;
   border-radius: 12px;
-  background: rgba(0, 0, 0, 0.28);
-  border: 1px dashed rgba(215, 236, 230, 0.2);
+  background: var(--bg-input);
+  border: 1px dashed var(--line);
   color: var(--fog);
   font-size: 0.84rem;
   word-break: break-all;
@@ -378,13 +422,13 @@ a.secondary,
   padding: 1.15rem 1.2rem;
   border-radius: var(--radius);
   border: 1px solid var(--line);
-  background: rgba(10, 34, 44, 0.72);
+  background: var(--bg-side);
 }
 
 .tip-card {
   background:
     linear-gradient(160deg, rgba(61, 220, 151, 0.12), transparent 55%),
-    rgba(10, 34, 44, 0.72);
+    var(--bg-side);
 }
 
 .tip-list {
@@ -457,7 +501,7 @@ table {
   overflow: hidden;
   border-radius: var(--radius);
   border: 1px solid var(--line);
-  background: rgba(14, 42, 56, 0.4);
+  background: var(--bg-card);
 }
 
 th,
@@ -536,7 +580,7 @@ th {
   font-size: clamp(2.8rem, 8vw, 5rem);
   margin: 0 0 1rem;
   line-height: 0.95;
-  background: linear-gradient(120deg, #f3faf7 20%, #3ddc97 85%);
+  background: var(--brand-gradient);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -567,7 +611,7 @@ th {
   padding: 1.35rem;
   border-radius: 24px;
   border: 1px solid var(--line);
-  background: rgba(8, 30, 40, 0.72);
+  background: var(--bg-auth-panel);
   box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
   animation: rise 0.8s ease 0.1s both;
@@ -580,7 +624,7 @@ th {
   margin-bottom: 1.2rem;
   padding: 0.3rem;
   border-radius: 999px;
-  background: rgba(0, 0, 0, 0.25);
+  background: var(--bg-tabs);
 }
 
 .auth-tab {
@@ -640,17 +684,17 @@ th {
 
 .btn-secondary,
 button.btn-secondary {
-  background: rgba(243, 250, 247, 0.08);
+  background: var(--bg-panel);
   color: var(--paper);
-  border: 1px solid rgba(243, 250, 247, 0.45);
+  border: 1px solid var(--line);
 }
 
 .btn-secondary:hover,
 button.btn-secondary:hover {
   filter: none;
-  background: rgba(61, 220, 151, 0.16);
+  background: var(--bg-chip);
   border-color: var(--mint);
-  color: #b8ffe0;
+  color: var(--mint);
 }
 
 .flash-ok {
@@ -685,7 +729,7 @@ button.btn-secondary:hover {
   padding: 1.85rem 1.6rem;
   border-radius: calc(var(--radius) + 4px);
   border: 1px solid var(--line);
-  background: rgba(14, 42, 56, 0.55);
+  background: var(--bg-panel);
   text-align: center;
 }
 
@@ -797,7 +841,7 @@ button.btn-secondary:hover {
   padding: 1.5rem 1.35rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: rgba(14, 42, 56, 0.45);
+  background: var(--bg-card);
   display: grid;
   gap: 1.2rem;
 }
@@ -844,6 +888,39 @@ button.btn-secondary:hover {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.theme-toggle {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--bg-panel);
+  color: var(--fog);
+  border-radius: 999px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  line-height: 1;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--mint);
+  color: var(--mint);
+  transform: none;
+  filter: none;
+}
+
+.theme-toggle-float {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 40;
+}
+
+html[data-theme="dark"] .theme-toggle .label-light,
+html[data-theme="light"] .theme-toggle .label-dark {
+  display: none;
 }
 
 @media (max-width: 640px) {

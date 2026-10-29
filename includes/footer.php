@@ -6,5 +6,6 @@
     </div>
 </footer>
 <?php endif; ?>
+<script src="/assets/js/theme.js" defer></script>
 </body>
 </html>
