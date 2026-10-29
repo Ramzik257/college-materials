@@ -5,6 +5,7 @@
         <small>Campus Notes · учебный проект производственной практики</small>
     </div>
 </footer>
+<script src="/assets/js/nav.js" defer></script>
 <?php endif; ?>
 <script src="/assets/js/theme.js" defer></script>
 </body>

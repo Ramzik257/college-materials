@@ -57,7 +57,19 @@ $userAvatar = $userLoggedIn ? currentUserAvatar() : '';
 <header class="site-header">
     <div class="shell header-row">
         <a class="logo" href="/index.php">Campus&nbsp;Notes</a>
-        <nav class="site-nav" aria-label="Основная">
+        <button
+            type="button"
+            class="nav-toggle"
+            id="nav-toggle"
+            aria-controls="site-nav"
+            aria-expanded="false"
+            aria-label="Открыть меню"
+        >
+            <span class="nav-toggle-bar" aria-hidden="true"></span>
+            <span class="nav-toggle-bar" aria-hidden="true"></span>
+            <span class="nav-toggle-bar" aria-hidden="true"></span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Основная">
             <a href="/index.php">Каталог</a>
             <?php if ($adminLoggedIn): ?>
                 <a href="/admin/index.php">Панель</a>
@@ -70,7 +82,7 @@ $userAvatar = $userLoggedIn ? currentUserAvatar() : '';
                     <?php if ($userAvatar !== ''): ?>
                         <img class="nav-avatar" src="<?= htmlspecialchars($userAvatar, ENT_QUOTES, 'UTF-8') ?>" alt="">
                     <?php endif; ?>
-                    <span><?= htmlspecialchars($userName, ENT_QUOTES, 'UTF-8') ?></span>
+                    <span class="nav-profile-name"><?= htmlspecialchars($userName, ENT_QUOTES, 'UTF-8') ?></span>
                 </a>
                 <a href="/logout-user.php">Выйти</a>
             <?php elseif ($guestBrowse): ?>
