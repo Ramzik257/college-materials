@@ -29,6 +29,9 @@ function db(): PDO
         $config['db_name'],
         $config['db_charset']
     );
+    if (!empty($config['db_port'])) {
+        $dsn .= ';port=' . (int) $config['db_port'];
+    }
 
     $pdo = new PDO($dsn, $config['db_user'], $config['db_pass'], [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

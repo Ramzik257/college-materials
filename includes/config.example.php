@@ -5,6 +5,7 @@
  */
 return [
     'db_host' => '127.0.0.1',
+    'db_port' => 3306, // на SpaceWeb часто 3308 — смотри в панели «Базы данных»
     'db_name' => 'college_materials',
     'db_user' => 'root',
     'db_pass' => '',
