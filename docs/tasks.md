@@ -28,4 +28,5 @@
 |--------|-------|--------|
 | Учебный merge conflict | #9 | ✅ закрыт: PR #20–#23 (два раунда на `conflict-playground.md`) |
 | Сравнение хостингов / продвижение | #10 (часть) | `docs/hosting.md`, `docs/promotion.md` |
-| Выкладка + HTTPS | #10 | ⏳ согласовать с руководителем |
+| Выкладка + HTTPS | #10 | ⏳ InfinityFree / бесплатный поддомен |
+| CI/CD (бонус) | доп. | ✅ GitHub Actions: lint + smoke; deploy по FTP-секретам |

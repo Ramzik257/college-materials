@@ -1,0 +1,37 @@
+# CI: проверка PHP при Pull Request и push в main
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  php-checks:
+    name: PHP lint + smoke tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          coverage: none
+
+      - name: PHP syntax check (php -l)
+        run: |
+          set -e
+          find . -name "*.php" \
+            -not -path "./vendor/*" \
+            -not -path "./.git/*" \
+            -print0 | while IFS= read -r -d "" file; do
+              echo "Lint: $file"
+              php -l "$file"
+            done
+
+      - name: Smoke tests
+        run: php tests/smoke.php
