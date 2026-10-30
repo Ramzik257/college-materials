@@ -4,7 +4,8 @@
 Стек: **HTML, CSS, JavaScript, PHP, MySQL**. Совместная работа через **Git**.
 
 **Репозиторий:** https://github.com/Ramzik257/college-materials  
-**Issues:** https://github.com/Ramzik257/college-materials/issues
+**Issues:** https://github.com/Ramzik257/college-materials/issues  
+**Сайт:** http://antonovan4.temp.swtest.ru
 
 ## Участники
 
@@ -29,6 +30,7 @@
 - Вход администратора (сессия) — PR #11
 - CRUD материалов — PR #12
 - Валидация форм JS + PHP — PR #13
+- Тема, профиль, CI, выкладка на SpaceWeb — см. `docs/tasks.md`, `docs/hosting.md`
 
 ## Быстрый запуск (локально)
 
@@ -40,8 +42,8 @@
 3. Импортируйте SQL:
    - `sql/schema.sql`
    - `sql/seed.sql`
-4. Импортируйте также `sql/users.sql` (если БД создавали раньше без таблицы users).
-5. Для профиля и избранного: `sql/profile.sql` (колонки avatar/bio + таблица favorites).
+4. На **хостинге** удобнее один файл: `sql/hosting.sql` (без `CREATE DATABASE`).
+5. Импортируйте также `sql/users.sql` / `sql/profile.sql` локально, если БД старая.
 6. Запуск:
    ```text
    php -S 127.0.0.1:8080 router.php

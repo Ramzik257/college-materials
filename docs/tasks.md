@@ -20,13 +20,14 @@
 | Вход администратора | #5 | [#11](https://github.com/Ramzik257/college-materials/pull/11) (merged) |
 | CRUD материалов | #6 | [#12](https://github.com/Ramzik257/college-materials/pull/12) (merged) |
 | Валидация JS + PHP | #7 | [#13](https://github.com/Ramzik257/college-materials/pull/13) (merged) |
-| Документы хостинга / conflict + перепроверка CRUD | #9/#10 (часть) | этот PR |
+| Документы хостинга / conflict + перепроверка CRUD | #9/#10 (часть) | docs + drill |
+| Выкладка на SpaceWeb + порт MySQL | #10 | PR #28 + live URL |
 
 ## Общее
 
 | Задача | Issue | Статус |
 |--------|-------|--------|
 | Учебный merge conflict | #9 | ✅ закрыт: PR #20–#23 (два раунда на `conflict-playground.md`) |
-| Сравнение хостингов / продвижение | #10 (часть) | `docs/hosting.md`, `docs/promotion.md` |
-| Выкладка + HTTPS | #10 | ⏳ InfinityFree / бесплатный поддомен |
+| Сравнение хостингов / продвижение | #10 (часть) | ✅ `docs/hosting.md`, `docs/promotion.md` |
+| Выкладка + публичный URL | #10 | ✅ SpaceWeb: http://antonovan4.temp.swtest.ru (HTTP; HTTPS на техдомене нет) |
 | CI/CD (бонус) | доп. | ✅ GitHub Actions: lint + smoke; deploy по FTP-секретам |
