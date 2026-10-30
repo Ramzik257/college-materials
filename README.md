@@ -70,6 +70,7 @@
 - [Хостинг и HTTPS](docs/hosting.md)
 - [Учебный merge conflict](docs/merge-conflict-drill.md)
 - [Продвижение](docs/promotion.md)
+- [CI/CD](docs/ci-cd.md) — проверка PHP на PR + деплой по секретам
 
 ## Структура
 
